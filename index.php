@@ -18,11 +18,13 @@
         $card = array_pop($deck);
         $suit = array("clubs", "diamonds", "hearts", "spades");
         $cardSuit = $suit[floor($card / 13)];
-        $randomCard = rand(1, 13);
+        //$randomCard = rand(1, 13);
         $cardValue = $card % 13;
         if($cardValue == 0) {
             $cardValue = 13;
+            $cardSuit = $suit[0];
         }
+      
     }
     
     // This function accepts an array by reference as a parameter ($cardSuitArray).
@@ -151,7 +153,7 @@
         //calculates the sum of the cards as it displays them. 
         for($i = 0; $i < $counter; $i++)
         {
-            echo "<img src = 'cards/".$suits[$i]."/".$values[$i].".png'>";
+            echo "<img src = 'cards/$suits[$i]/$values[$i].png'>";
             $sum+= $values[$i];
         }
         return $sum; 
