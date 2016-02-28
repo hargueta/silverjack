@@ -19,6 +19,9 @@
         </footer>
         <main>
             
+            
+            <button type="button">Play Again</button>
         </main>
+        
     </body>
 </html>
