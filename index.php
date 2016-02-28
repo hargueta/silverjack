@@ -159,43 +159,65 @@
         return $sum; 
     }
     
-    function displayWinner($scores)
-    {
-        $max = 0; 
-        $playerTemp = " ";
+function displayWinner($scores)
+{
+        $playerTemp;
         $totalSum = 0; 
+        $minDifference = 5; 
+        $tempScore = 0; 
+        $difference =0;
         //arrays track the winning player and its score 
-        $winners = array(); 
+        $tiePlayers = array(); 
         $winningPlayer = array(); 
 
         foreach( $scores as $player =>  $score)
         {
             $totalSum += $score; 
-            if($score > $max)
+           
+            if($score ==  42)
             {
-                $max = $score;
-                $playerTemp = $player;
+               
+               array_push($winningPlayer,$player);
+               $playerTemp = " ";
+               $minDifference = 0;
+               $tempScore = 42;
             }
-            else if($score == $max)
+            else if($score < 42 && $minDifference > abs(42-$score) )
             {
-                array_push($winners,$score);
+                     $playerTemp = $player;
+                     $tempScore = $score; 
+                     $minDifference = abs(42- $score);
+
+            }
+            else if($score < 42 && $minDifference == abs(42 -$score))
+            {
+              
                 array_push($winningPlayer,$player);
             }
-        }
-        array_push($winners,$max);
-        array_push($winningPlayer,$playerTemp);
-        
-        
-        $totalSum = (($totalSum-$max)/count($winners));
-        for($i = 0; $i < count($winners); $i++)
-        {
             
-            //echo $winningPlayer[$i]." wins ".$totalSum." points !!!"."</br>";
-            echo '<center>'.$winningPlayer[$i]." wins ".$totalSum." points !!!".'</center>';
-            echo'</br>';
+        }
+        if($playerTemp != " ")
+        {
+            array_push($winningPlayer,$playerTemp);
         }
         
-    }
+        if(count($winningPlayer) == 0)
+            echo '<enter>'."No Winners !!".'</center>';
+        else
+        {
+            $totalSum = (($totalSum-$tempScore)/count($winningPlayer));
+            for($i = 0; $i < count($winningPlayer); $i++)
+            {
+                    
+                //echo $winningPlayer[$i]." wins ".$totalSum." points !!!"."</br>";
+                echo '<center>'.$winningPlayer[$i]." wins ".$totalSum." points !!!".'</center>';
+                //echo '<center>'.$tiePlayers[$i]." wins ".$totalSum." points !!!".'</center>';
+                echo'</br>';
+            }
+        
+        }
+        
+}
     
     
     // Tests for each array. Uncomment and run to see paralle values
